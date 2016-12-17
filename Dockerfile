@@ -12,19 +12,21 @@ ENV LANG C.UTF-8
 ENV LANGUAGE C.UTF-8
 ENV LC_ALL C.UTF-8
 RUN apt-get update && apt-get install -y python-pip git vim
-RUN apt-get install -y ghostscript
+RUN apt-get install -y ghostscript  && \
+    apt-get install -y python-gevent  && \
+    apt-get install -y python-dev freetds-dev  && \
+    apt-get install -y python-matplotlib font-manager  && \
+    apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
+    apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
+    apt-get install -y swig libssl-dev  && \
+    apt-get install -y libcups2-dev  && \
+
 RUN pip install urllib3
 RUN pip install acme-tiny
 RUN sudo pip install IPy
-RUN apt-get install -y python-gevent
 RUN pip install psycogreen
-RUN apt-get install -y python-dev freetds-dev
 RUN pip install pymssql
-RUN apt-get install -y python-matplotlib font-manager
-RUN apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial
-RUN apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev
 RUN pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds cryptography certifi
-RUN apt-get install -y swig libssl-dev
 RUN pip install suds
 RUN git clone https://github.com/bmya/pyafipws.git
 WORKDIR /pyafipws/
@@ -54,7 +56,6 @@ RUN chown -R odoo /opt/odoo/stable-addons
 RUN chown -R odoo /mnt/extra-addons
 RUN chown -R odoo /var/lib/odoo
 RUN pip install unicodecsv
-RUN apt-get install -y libcups2-dev
 RUN pip install git+https://github.com/aeroo/aeroolib.git@master
 RUN pip install pycups==1.9.68
 RUN pip install BeautifulSoup4
