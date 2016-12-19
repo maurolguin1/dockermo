@@ -3,6 +3,7 @@ MAINTAINER Blanco Martín & Asociados <daniel@blancomartin.cl>
 # based on https://github.com/ingadhoc/docker-odoo-adhoc
 # with custom references
 # install some dependencies
+#Test6
 USER root
 
 # Generate locale (es_AR for right odoo es_AR language config, and C.UTF-8 for postgres and general locale data)
@@ -22,15 +23,8 @@ ENV LC_ALL C.UTF-8
 # adds slqalchemy
 RUN apt-get update && apt-get install -y python-pip git vim
 RUN apt-get install -y ghostscript  && \
-    apt-get install -y python-gevent  && \
-    apt-get install -y python-dev freetds-dev  && \
-    apt-get install -y python-matplotlib font-manager  && \
-    apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
-    apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
-    apt-get install -y swig libssl-dev  && \
-    apt-get install -y libcups2-dev 
 
-# 
+
 RUN pip install urllib3
 # RUN pip install sqlalchemy
 # debug database version
@@ -42,32 +36,24 @@ RUN sudo pip install IPy
 
 # woocommerce dependency
 RUN pip install woocommerce
-RUN pip install magento
 
-
-
+# Workers and longpolling dependencies
+RUN apt-get install -y python-gevent
 
 RUN pip install psycogreen
 
 ## Install pip dependencies for adhoc used odoo repositories
 # 
+# used by many pip packages
+RUN apt-get install -y python-dev freetds-dev && \
+    pip install pymssql && \
+    apt-get install -y python-matplotlib font-manager && \
+    apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial && \
+    apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev && \
+    pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds cryptography certifi && \
+    apt-get install -y swig libssl-dev && \
+    pip install suds
 
-
-# Freetds an pymssql added in conjunction
-RUN pip install pymssql
-
-
-RUN pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds cryptography certifi
-
-# odoo bmya cambiado de orden (antes o despues de odoo argentina)
-
-# to be removed when we remove crypto
-RUN pip install suds
-
-# Agregado por Daniel Blanco para ver si soluciona el problema de la falta de la biblioteca pysimplesoap
-# RUN git clone https://github.com/pysimplesoap/pysimplesoap.git
-# WORKDIR /pysimplesoap/
-# RUN python setup.py install
 
 # instala pyafip desde google code usando mercurial
 # M2Crypto suponemos que no haria falta ahora
@@ -85,39 +71,31 @@ RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 # RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
 # odoo etl, infra and others
-RUN pip install openerp-client-lib fabric erppeek fabtools
-
-# dte implementation
-RUN pip install xmltodict
-RUN pip install dicttoxml
-RUN pip install elaphe
-# RUN pip install hashlib
-RUN pip install cchardet
-RUN pip install lxml
-RUN pip install signxml
-
-RUN pip install pysftp
-
-# oca reports
-RUN pip install xlwt
-
-# odoo kineses
-RUN pip install xlrd
+RUN pip install openerp-client-lib fabric erppeek fabtools && \
+    pip install xmltodict && \
+    pip install dicttoxml && \
+    pip install elaphe && \
+    pip install cchardet && \
+    pip install lxml && \
+    pip install signxml && \
+    pip install pysftp && \
+    pip install xlwt && \
+    pip install xlrd
 
 # create directories for repos
-RUN mkdir -p /opt/odoo/stable-addons/oca
-RUN mkdir -p /opt/odoo/stable-addons/bmya/odoo-chile
-RUN mkdir -p /opt/odoo/.filelocal/odoo
-RUN mkdir -p /var/lib/odoo/backups/synced
+RUN mkdir -p /opt/odoo/stable-addons/oca && \
+    mkdir -p /opt/odoo/stable-addons/bmya/odoo-chile && \
+    mkdir -p /opt/odoo/.filelocal/odoo && \
+    mkdir -p /var/lib/odoo/backups/synced
 
 # update openerp-server.conf file (todo: edit with "sed")
 COPY ./openerp-server.conf /etc/odoo/
-RUN chown odoo /etc/odoo/openerp-server.conf
-RUN chmod 644 /etc/odoo/openerp-server.conf
-RUN chown -R odoo /opt/odoo
-RUN chown -R odoo /opt/odoo/stable-addons
-RUN chown -R odoo /mnt/extra-addons
-RUN chown -R odoo /var/lib/odoo
+RUN chown odoo /etc/odoo/openerp-server.conf && \
+    chmod 644 /etc/odoo/openerp-server.conf && \
+    chown -R odoo /opt/odoo && \
+    chown -R odoo /opt/odoo/stable-addons && \
+    chown -R odoo /mnt/extra-addons && \
+    chown -R odoo /var/lib/odoo
 # RUN chown -R odoo /mnt/filelocal/odoo
 
 # oca partner contacts
@@ -125,24 +103,12 @@ RUN pip install unicodecsv
 
 # aeroo direct print
 RUN apt-get install -y libcups2-dev
-RUN pip install git+https://github.com/aeroo/aeroolib.git@master
-RUN pip install pycups==1.9.68
-
-# akretion/odoo-usability
-RUN pip install BeautifulSoup4
-
-# OCA knowledge
-RUN pip install python-magic
-
-# l10n_cl_dte exclusive
-# RUN apt-get -y install xmlsec1
-# RUN apt-get -y install libxml2-dev libxmlsec1-dev
-# RUN pip install dm.xmlsec.binding
-RUN pip install SOAPpy
-# RUN pip install fs
-
-# odoo suspport
-RUN pip install erppeek
+RUN pip install git+https://github.com/aeroo/aeroolib.git@master && \
+    pip install pycups==1.9.68 && \
+    pip install BeautifulSoup4 && \
+    pip install python-magic && \
+    pip install SOAPpy && \
+    pip install erppeek
 
 # Instalación de repositorios varios BMyA
 WORKDIR /opt/odoo/stable-addons/bmya/
@@ -205,14 +171,6 @@ RUN git clone -b 8.0 https://github.com/OCA/knowledge.git
 RUN git clone -b 8.0 https://github.com/OCA/web.git
 RUN git clone -b 8.0 https://github.com/OCA/bank-statement-reconcile.git
 RUN git clone -b 8.0 https://github.com/OCA/account-invoicing.git
-# MAGENTO
-#RUN git clone -B 8.0 https://github.com/OCA/connector.git
-RUN git clone -B 8.0 https://github.com/OCA/connector-ecommerce.git
-RUN git clone -B 8.0 https://github.com/OCA/connector-magento.git
-RUN git clone -B 8.0 https://github.com/OCA/e-commerce.git
-RUN git clone -B 8.0 https://github.com/OCA/product-attribute.git
-RUN git clone -B 8.0 https://github.com/OCA/sale-workflow.git
-
 
 RUN chown -R odoo:odoo /opt/odoo/stable-addons
 WORKDIR /opt/odoo/stable-addons/
