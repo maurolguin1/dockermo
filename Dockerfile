@@ -69,23 +69,7 @@ RUN git clone -b 8.0 https://github.com/bmya/account-financial-tools.git
 RUN git clone -b 8.0 https://github.com/bmya/partner.git
 RUN git clone -b 8.0 https://github.com/bmya/stock.git
 RUN git clone -b bmya_custom2 https://github.com/bmya/odoo-support.git
-RUN git clone -b 8.0 https://github.com/bmya/project.git
-RUN git clone -b 8.0 https://github.com/bmya/account-payment.git
-RUN git clone -b 8.0 https://github.com/bmya/account-invoicing.git
-RUN git clone -b 8.0 https://github.com/bmya/website.git
-RUN git clone -b 8.0 https://github.com/bmya/odoo-web.git
-RUN git clone -b 8.0 https://github.com/bmya/multi-company.git
-RUN git clone -b 8.0 https://github.com/bmya/account-analytic.git
-RUN git clone -b 8.0 https://github.com/bmya/purchase.git
-RUN git clone -b 8.0 https://github.com/bmya/reporting-engine.git
-RUN git clone -b 8.0 https://github.com/bmya/crm.git
-RUN git clone -b 8.0 https://github.com/bmya/miscellaneous.git
-RUN git clone -b 8.0 https://github.com/bmya/surveyor.git
-RUN git clone -b 8.0 https://github.com/bmya/odoo-logistic.git
-RUN git clone -b 8.0 https://github.com/bmya/server-tools.git
-RUN git clone -b 8.0 https://github.com/bmya/margin-analysis.git
-RUN git clone -b 8.0 https://github.com/bmya/pos-addons.git
-RUN git clone -b 8.0 https://github.com/bmya/pos.git
+
 # Localización Chilena
 RUN git clone -b 8.0 https://github.com/bmya/odoo-bmya-cl.git
 # Otras dependencias de BMyA
