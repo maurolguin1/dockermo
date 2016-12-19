@@ -23,9 +23,7 @@ ENV LC_ALL C.UTF-8
 # adds slqalchemy
 RUN apt-get update && apt-get install -y python-pip git vim
 RUN apt-get install -y ghostscript  && \
-
-
-RUN pip install urllib3
+    pip install urllib3
 # RUN pip install sqlalchemy
 # debug database version
 # RUN pip install passlib
