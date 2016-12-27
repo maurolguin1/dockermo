@@ -29,6 +29,7 @@ RUN pip install urllib3
 # debug database version
 # RUN pip install passlib
 
+
 # letsencrypt dependencies:
 RUN pip install acme-tiny
 RUN sudo pip install IPy
@@ -97,7 +98,7 @@ RUN pip install cchardet
 RUN pip install lxml
 RUN pip install signxml
 
-RUN pip install pysftp
+RUN pip install pysftp==0.2.8
 
 # oca reports
 RUN pip install xlwt
