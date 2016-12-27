@@ -98,6 +98,7 @@ RUN pip install cchardet
 RUN pip install lxml
 RUN pip install signxml
 
+# For Backups
 RUN pip install pysftp==0.2.8
 
 # oca reports
