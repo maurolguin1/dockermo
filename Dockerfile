@@ -21,14 +21,7 @@ ENV LC_ALL C.UTF-8
 # Install some deps
 # adds slqalchemy
 RUN apt-get update && apt-get install -y python-pip git vim
-RUN apt-get install -y ghostscript  && \
-    apt-get install -y python-gevent  && \
-    apt-get install -y python-dev freetds-dev  && \
-    apt-get install -y python-matplotlib font-manager  && \
-    apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
-    apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
-    apt-get install -y swig libssl-dev  && \
-    apt-get install -y libcups2-dev 
+RUN apt-get install -y ghostscript
 
 # 
 RUN pip install urllib3
@@ -42,25 +35,33 @@ RUN sudo pip install IPy
 
 # woocommerce dependency
 RUN pip install woocommerce
-RUN pip install magento
 
-
-
+# Workers and longpolling dependencies
+RUN apt-get install -y python-gevent
 
 RUN pip install psycogreen
 
 ## Install pip dependencies for adhoc used odoo repositories
 # 
-
+# used by many pip packages
+RUN apt-get install -y python-dev freetds-dev 
 
 # Freetds an pymssql added in conjunction
 RUN pip install pymssql
 
+# odoo-extra
+RUN apt-get install -y python-matplotlib font-manager
+
+# odoo argentina (nuevo modulo de FE).
+RUN apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial
+# NECESATIOS PARA SIGNXML
+RUN apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev
 
 RUN pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds cryptography certifi
 
 # odoo bmya cambiado de orden (antes o despues de odoo argentina)
-
+# to be removed when we remove crypto
+RUN apt-get install -y swig libssl-dev
 # to be removed when we remove crypto
 RUN pip install suds
 
@@ -71,7 +72,7 @@ RUN pip install suds
 
 # instala pyafip desde google code usando mercurial
 # M2Crypto suponemos que no haria falta ahora
-# RUN hg clone https://code.google.com/p/pyafipws
+#RUN hg clone https://code.google.com/p/pyafipws
 RUN git clone https://github.com/bmya/pyafipws.git
 WORKDIR /pyafipws/
 # ADD ./requirements.txt /pyafipws/
@@ -184,12 +185,13 @@ RUN git clone -b 8.0 https://github.com/bmya/pos.git
 # Localización Argentina
 RUN git clone -b 8.0 https://github.com/bmya/odoo-argentina.git
 
-RUN git clone -b 8.0 https://github.com/bmya/odoo-bmya-cl.git
+# Localización Chilena (Con Factura Electrónica LibreDTE)
+RUN git clone -b 8.0_libredte https://github.com/bmya/odoo-bmya-cl.git
 
 # Otras dependencias de BMyA
 RUN git clone -b 8.0 https://github.com/bmya/odoo-bmya.git
 RUN git clone -b 8.0 https://github.com/bmya/website-addons.git
-# Otras (todo: revisar el tko porque hay módulos que no conviene instalar)
+
 RUN git clone -b 8.0 https://github.com/bmya/odoo-single-adv.git
 RUN git clone -b bmya_custom https://github.com/bmya/tkobr-addons.git tko
 RUN git clone https://github.com/bmya/addons-yelizariev.git
@@ -206,21 +208,13 @@ RUN git clone -b 8.0 https://github.com/OCA/knowledge.git
 RUN git clone -b 8.0 https://github.com/OCA/web.git
 RUN git clone -b 8.0 https://github.com/OCA/bank-statement-reconcile.git
 RUN git clone -b 8.0 https://github.com/OCA/account-invoicing.git
-# MAGENTO
-#RUN git clone -B 8.0 https://github.com/OCA/connector.git
-RUN git clone -B 8.0 https://github.com/OCA/connector-ecommerce.git
-RUN git clone -B 8.0 https://github.com/OCA/connector-magento.git
-RUN git clone -B 8.0 https://github.com/OCA/e-commerce.git
-RUN git clone -B 8.0 https://github.com/OCA/product-attribute.git
-RUN git clone -B 8.0 https://github.com/OCA/sale-workflow.git
-
-#Respaldos
-RUN git clone -B 8.0 https://github.com/Yenthe666/auto_backup.git
-
 
 RUN chown -R odoo:odoo /opt/odoo/stable-addons
 WORKDIR /opt/odoo/stable-addons/
 RUN git clone -b 8.0 https://github.com/aeroo/aeroo_reports.git
+
+#Respaldos
+RUN git clone -B 8.0 https://github.com/Yenthe666/auto_backup.git
 
 ## Clean apt-get (copied from odoo)
 RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false
