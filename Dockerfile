@@ -21,6 +21,14 @@ ENV LC_ALL C.UTF-8
 # Install some deps
 # adds slqalchemy
 RUN apt-get update && apt-get install -y python-pip git vim
+RUN apt-get install -y ghostscript  && \
+    apt-get install -y python-gevent  && \
+    apt-get install -y python-dev freetds-dev  && \
+    apt-get install -y python-matplotlib font-manager  && \
+    apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
+    apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
+    apt-get install -y swig libssl-dev  && \
+    apt-get install -y libcups2-dev 
 RUN apt-get install -y ghostscript
 
 # 
