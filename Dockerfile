@@ -208,6 +208,7 @@ RUN git clone -b bmya_custom https://github.com/bmya/tkobr-addons.git tko
 RUN git clone https://github.com/bmya/addons-yelizariev.git
 RUN git clone https://github.com/bmya/ws-zilinkas.git
 
+
 WORKDIR /opt/odoo/stable-addons/bmya/odoo-chile/
 RUN git clone -b 8.0 https://github.com/odoo-chile/l10n_cl_vat.git
 RUN git clone -b 8.0 https://github.com/odoo-chile/base_state_ubication.git
@@ -219,6 +220,14 @@ RUN git clone -b 8.0 https://github.com/OCA/knowledge.git
 RUN git clone -b 8.0 https://github.com/OCA/web.git
 RUN git clone -b 8.0 https://github.com/OCA/bank-statement-reconcile.git
 RUN git clone -b 8.0 https://github.com/OCA/account-invoicing.git
+
+# MAGENTO
+#RUN git clone -B 8.0 https://github.com/OCA/connector.git
+RUN git clone -B 8.0 https://github.com/OCA/connector-ecommerce.git
+RUN git clone -B 8.0 https://github.com/OCA/connector-magento.git
+RUN git clone -B 8.0 https://github.com/OCA/e-commerce.git
+RUN git clone -B 8.0 https://github.com/OCA/product-attribute.git
+RUN git clone -B 8.0 https://github.com/OCA/sale-workflow.git
 
 RUN chown -R odoo:odoo /opt/odoo/stable-addons
 WORKDIR /opt/odoo/stable-addons/
