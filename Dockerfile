@@ -96,7 +96,8 @@ RUN pip install cchardet
 RUN pip install lxml
 RUN pip install signxml
 
-RUN pip install pysftp
+#RUN pip install pysftp
+RUN pip install pysftp==0.2.8
 
 # oca reports
 RUN pip install xlwt
@@ -212,6 +213,9 @@ RUN git clone -B 8.0 https://github.com/OCA/connector-magento.git
 RUN git clone -B 8.0 https://github.com/OCA/e-commerce.git
 RUN git clone -B 8.0 https://github.com/OCA/product-attribute.git
 RUN git clone -B 8.0 https://github.com/OCA/sale-workflow.git
+
+#Respaldos
+RUN git clone -B 8.0 https://github.com/Yenthe666/auto_backup.git
 
 
 RUN chown -R odoo:odoo /opt/odoo/stable-addons
