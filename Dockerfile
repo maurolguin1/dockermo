@@ -21,15 +21,7 @@ ENV LC_ALL C.UTF-8
 # Install some deps
 # adds slqalchemy
 RUN apt-get update && apt-get install -y python-pip git vim
-RUN apt-get install -y ghostscript  && \
-    apt-get install -y python-gevent  && \
-    apt-get install -y python-dev freetds-dev  && \
-    apt-get install -y python-matplotlib font-manager  && \
-    apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
-    apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
-    apt-get install -y swig libssl-dev  && \
-    apt-get install -y libcups2-dev
-
+RUN apt-get install -y ghostscript
 
 # 
 RUN pip install urllib3
@@ -40,9 +32,6 @@ RUN pip install urllib3
 # letsencrypt dependencies:
 RUN pip install acme-tiny
 RUN sudo pip install IPy
-
-# adhoc-website
-RUN pip install mercadopago
 
 # woocommerce dependency
 RUN pip install woocommerce
@@ -108,8 +97,7 @@ RUN pip install cchardet
 RUN pip install lxml
 RUN pip install signxml
 
-#RUN pip install pysftp
-RUN pip install pysftp==0.2.8
+RUN pip install pysftp
 
 # oca reports
 RUN pip install xlwt
@@ -208,7 +196,6 @@ RUN git clone -b bmya_custom https://github.com/bmya/tkobr-addons.git tko
 RUN git clone https://github.com/bmya/addons-yelizariev.git
 RUN git clone https://github.com/bmya/ws-zilinkas.git
 
-
 WORKDIR /opt/odoo/stable-addons/bmya/odoo-chile/
 RUN git clone -b 8.0 https://github.com/odoo-chile/l10n_cl_vat.git
 RUN git clone -b 8.0 https://github.com/odoo-chile/base_state_ubication.git
@@ -221,20 +208,9 @@ RUN git clone -b 8.0 https://github.com/OCA/web.git
 RUN git clone -b 8.0 https://github.com/OCA/bank-statement-reconcile.git
 RUN git clone -b 8.0 https://github.com/OCA/account-invoicing.git
 
-# MAGENTO
-#RUN git clone -B 8.0 https://github.com/OCA/connector.git
-RUN git clone -B 8.0 https://github.com/OCA/connector-ecommerce.git
-RUN git clone -B 8.0 https://github.com/OCA/connector-magento.git
-RUN git clone -B 8.0 https://github.com/OCA/e-commerce.git
-RUN git clone -B 8.0 https://github.com/OCA/product-attribute.git
-RUN git clone -B 8.0 https://github.com/OCA/sale-workflow.git
-
 RUN chown -R odoo:odoo /opt/odoo/stable-addons
 WORKDIR /opt/odoo/stable-addons/
 RUN git clone -b 8.0 https://github.com/aeroo/aeroo_reports.git
-
-#Respaldos
-RUN git clone -B 8.0 https://github.com/Yenthe666/auto_backup.git
 
 ## Clean apt-get (copied from odoo)
 RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false
