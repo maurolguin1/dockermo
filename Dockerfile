@@ -136,6 +136,8 @@ RUN pip install python-magic
 # RUN apt-get -y install libxml2-dev libxmlsec1-dev
 # RUN pip install dm.xmlsec.binding
 RUN pip install SOAPpy
+RUN pip install xlsxwriter
+RUN pip install mercadopago
 # RUN pip install fs
 
 # odoo suspport
@@ -160,7 +162,9 @@ RUN git clone -b 9.0 https://github.com/dansanti/l10n_cl_banks_sbif.git  \
     && git clone -b 9.0 https://github.com/odoo-chile/l10n_cl_hr_payroll.git \
     && git clone -b 9.0 https://github.com/KonosCL/payment_mercadopago.git \
     && git clone -b Odoo-9 https://github.com/nelsonramirezs/hr_loan.git \
-    && git clone -b 9.0 https://github.com/nelsonramirezs/odoo-ifrs.git
+    && git clone -b 9.0 https://github.com/nelsonramirezs/odoo-ifrs.git \
+    && git clone -b master https://github.com/nelsonramirezs/report_xlsx.git 
+    
    
 
 RUN chown -R odoo:odoo /opt/odoo/stable-addons
