@@ -155,7 +155,10 @@ RUN git clone -b 9.0 https://github.com/dansanti/l10n_cl_banks_sbif.git  \
     && git clone -b 9.0 https://github.com/dansanti/l10n_cl_base_rut.git  \
     && git clone -b 9.0 https://github.com/dansanti/base_state_ubication.git \
     && git clone -b 9.0 https://github.com/dansanti/user_signature_key.git \
-    && git clone -b 9.0 https://github.com/OCA/pos.git 
+    && git clone -b 9.0 https://github.com/OCA/pos.git  \
+    && git clone -b 9.0 https://github.com/dansanti/webservices_generic.git   \
+    && git clone -b 9.0 https://github.com/odoo-chile/l10n_cl_hr_payroll
+   
 
 RUN chown -R odoo:odoo /opt/odoo/stable-addons
 
