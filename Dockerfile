@@ -145,23 +145,21 @@ RUN pip install SOAPpy
 # odoo suspport
 RUN pip install erppeek
 
-ENV EXTRA_ADDONS /opt/odoo/stable-addons/bmya/odoo-chile/
+WORKDIR /opt/odoo/stable-addons/bmya/odoo-chile/
 
-# Add config basic user to work with git
-
-RUN git clone --single-branch --depth=1 -b 9.0 https://github.com/dansanti/l10n_cl_banks_sbif.git ${EXTRA_ADDONS} \
-    && git clone --single-branch --depth=1 -b 9.0 https://github.com/dansanti/l10n_cl_invoice.git ${EXTRA_ADDONS} \
-    && git clone --single-branch --depth=1 -b 9.0 https://github.com/dansanti/l10n_cl_dte.git ${EXTRA_ADDONS} \
-    && git clone --single-branch --depth=1 -b 9.0 https://github.com/dansanti/l10n_cl_stock_picking.git ${EXTRA_ADDONS} \
-    && git clone --single-branch --depth=1 -b 9.0 https://github.com/dansanti/l10n_cl_dte_point_of_sale.git ${EXTRA_ADDONS} \
-    && git clone --single-branch --depth=1 -b 9.0 https://github.com/dansanti/l10n_cl_libro_compra_venta.git ${EXTRA_ADDONS} \
-    && git clone --single-branch --depth=1 -b 9.0 https://github.com/dansanti/l10n_cl_dte_caf.git ${EXTRA_ADDONS} \
-    && git clone --single-branch --depth=1 -b 9.0 https://github.com/dansanti/l10n_cl_counties.git ${EXTRA_ADDONS} \
-    && git clone --single-branch --depth=1 -b 9.0 https://github.com/dansanti/l10n_cl_partner_activities.git ${EXTRA_ADDONS} \
-    && git clone --single-branch --depth=1 -b 9.0 https://github.com/dansanti/l10n_cl_base_rut.git ${EXTRA_ADDONS} \
-    && git clone --single-branch --depth=1 -b 9.0 https://github.com/dansanti/base_state_ubication.git ${EXTRA_ADDONS} 
-    && git clone --single-branch --depth=1 -b 9.0 https://github.com/dansanti/user_signature_key.git ${EXTRA_ADDONS} 
-    && git clone --single-branch --depth=1 -b 9.0 https://github.com/OCA/pos.git ${EXTRA_ADDONS} 
+RUN git clone -b 9.0 https://github.com/dansanti/l10n_cl_banks_sbif.git  \
+    && git clone -b 9.0 https://github.com/dansanti/l10n_cl_invoice.git  \
+    && git clone -b 9.0 https://github.com/dansanti/l10n_cl_dte.git  \
+    && git clone -b 9.0 https://github.com/dansanti/l10n_cl_stock_picking.git \
+    && git clone -b 9.0 https://github.com/dansanti/l10n_cl_dte_point_of_sale.git  \
+    && git clone -b 9.0 https://github.com/dansanti/l10n_cl_libro_compra_venta.git  \
+    && git clone -b 9.0 https://github.com/dansanti/l10n_cl_dte_caf.git  \
+    && git clone -b 9.0 https://github.com/dansanti/l10n_cl_counties.git  \
+    && git clone -b 9.0 https://github.com/dansanti/l10n_cl_partner_activities.git  \
+    && git clone -b 9.0 https://github.com/dansanti/l10n_cl_base_rut.git  \
+    && git clone -b 9.0 https://github.com/dansanti/base_state_ubication.git \
+    && git clone -b 9.0 https://github.com/dansanti/user_signature_key.git \
+    && git clone -b 9.0 https://github.com/OCA/pos.git 
 
 RUN chown -R odoo:odoo /opt/odoo/stable-addons
 
