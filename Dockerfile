@@ -32,13 +32,11 @@ RUN apt-get install -y ghostscript  && \
 
 # 
 RUN pip install urllib3
-# RUN pip install sqlalchemy
-# debug database version
-# RUN pip install passlib
+
 
 # letsencrypt dependencies:
 RUN pip install acme-tiny
-RUN sudo pip install IPy
+#RUN sudo pip install IPy
 
 # woocommerce dependency
 RUN pip install woocommerce
@@ -49,8 +47,6 @@ RUN pip install magento
 
 RUN pip install psycogreen
 
-## Install pip dependencies for adhoc used odoo repositories
-# 
 
 
 # Freetds an pymssql added in conjunction
