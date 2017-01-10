@@ -176,10 +176,10 @@ RUN git clone -b 9.0 https://github.com/OCA/server-tools.git  \
     
 WORKDIR /opt/odoo/stable-addons/oca/
 
-RUN git clone -b 9.0 https://github.com/OCA/knowledge.git  \
-    && clone -b 9.0 https://github.com/OCA/web.git  \
-    && clone -b 9.0 https://github.com/OCA/bank-statement-reconcile.git  \
-    && clone -b 9.0 https://github.com/OCA/account-invoicing.git
+#RUN git clone -b 9.0 https://github.com/OCA/knowledge.git  \
+RUN git  clone -b 9.0 https://github.com/OCA/web.git  
+RUN git  clone -b 9.0 https://github.com/OCA/bank-statement-reconcile.git  
+RUN git  clone -b 9.0 https://github.com/OCA/account-invoicing.git
     
    
 
