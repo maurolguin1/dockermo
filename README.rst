@@ -48,5 +48,5 @@ ALTER USER odoo WITH SUPERUSER;
 docker run -d --restart="always" --name odoo \
 -v /opt/odoo/extra-addons:/mnt/extra-addons \
 -p 127.0.0.1:8069:8069 \
---link postgres:db -t bmya/odoo-bmya:latest
+--link postgres:db -t nelsonramirezs/odoo-konos:latest
 
