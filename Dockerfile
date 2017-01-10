@@ -167,7 +167,10 @@ RUN git clone -b 9.0 https://github.com/dansanti/l10n_cl_banks_sbif.git  \
     
 WORKDIR /opt/odoo/stable-addons/oca/
     
-RUN git clone -b 9.0 https://github.com/OCA/server-tools.git 
+RUN git clone -b 9.0 https://github.com/OCA/server-tools.git  \
+    && git clone -b 9.0 https://github.com/OCA/vertical-medical.git  \
+    && git clone -b 9.0 https://github.com/OCA/crm.git  \
+    && git clone -b 9.0 https://github.com/OCA/e-commerce.git  
     
    
 
