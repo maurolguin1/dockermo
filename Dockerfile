@@ -166,10 +166,7 @@ RUN git clone -b 9.0 https://github.com/dansanti/l10n_cl_banks_sbif.git  \
     && git clone -b Odoo-9 https://github.com/nelsonramirezs/hr_loan.git \
     && git clone -b 9.0 https://github.com/nelsonramirezs/odoo-ifrs.git \
     && git clone -b master https://github.com/nelsonramirezs/report_xlsx.git 
-    
-WORKDIR /opt/odoo/stable-addons/oca/
-    
-RUN git clone -b 9.0 https://github.com/OCA/server-tools.git  \
+    && git clone -b 9.0 https://github.com/OCA/server-tools.git  \
     && git clone -b 9.0 https://github.com/OCA/vertical-medical.git  \
     && git clone -b 9.0 https://github.com/OCA/crm.git  \
     && git clone -b 9.0 https://github.com/OCA/e-commerce.git  
