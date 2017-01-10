@@ -160,6 +160,8 @@ RUN git clone -b 9.0 https://github.com/dansanti/l10n_cl_banks_sbif.git  \
     && git clone -b 9.0 https://github.com/OCA/pos.git  \
     && git clone -b 9.0 https://github.com/dansanti/webservices_generic.git   \
     && git clone -b 9.0 https://github.com/odoo-chile/l10n_cl_hr_payroll.git \
+    && git clone -b 9.0 https://github.com/odoo-chile/l10n_cl_financial_indicators.git \
+    && git clone -b 9.0 https://github.com/odoo-chile/l10n_cl_account_vat_ledger.git \
     && git clone -b 9.0 https://github.com/KonosCL/payment_mercadopago.git \
     && git clone -b Odoo-9 https://github.com/nelsonramirezs/hr_loan.git \
     && git clone -b 9.0 https://github.com/nelsonramirezs/odoo-ifrs.git \
