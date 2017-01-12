@@ -32,6 +32,7 @@ RUN apt-get install -y ghostscript  && \
 
 # 
 RUN pip install urllib3
+RUN pip install egenix-mx-base
 
 
 # letsencrypt dependencies:
