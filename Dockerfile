@@ -28,18 +28,16 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
     apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
     apt-get install -y swig libssl-dev  && \
-    apt-get install -y libcups2-dev && \
-    apt-get install -y python-cffi python-openssl python-defusedxml
+    apt-get install -y libcups2-dev 
 
-
-# Debo agregar Requests
-# RUN pip install requests
+# 
 RUN pip install urllib3
 RUN pip install egenix-mx-base
 
 
 # letsencrypt dependencies:
 RUN pip install acme-tiny
+#RUN sudo pip install IPy
 
 # woocommerce dependency
 RUN pip install woocommerce
@@ -84,7 +82,7 @@ RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 # RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
 # odoo etl, infra and others
-RUN pip install openerp-client-lib fabric erppeek fabtools
+RUN pip install openerp-client-lib fabric fabtools
 
 # dte implementation
 RUN pip install xmltodict
@@ -127,8 +125,10 @@ RUN chown -R odoo /var/lib/odoo
 # oca partner contacts
 RUN pip install unicodecsv
 
+
+RUN apt-get install -y python-cffi python-openssl python-defusedxml
+
 # aeroo direct print
-RUN apt-get install -y libcups2-dev
 RUN pip install git+https://github.com/aeroo/aeroolib.git@master
 RUN pip install pycups==1.9.68
 
