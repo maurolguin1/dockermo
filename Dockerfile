@@ -5,7 +5,7 @@ MAINTAINER Nelson Ramirez <info@konos.cl>
 # install some dependencies
 USER root
 
-
+# Generate locale (es_AR for right odoo es_AR language config, and C.UTF-8 for postgres and general locale data)
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq && apt-get install -y locales -qq
 RUN echo 'es_AR.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
@@ -28,8 +28,7 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
     apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
     apt-get install -y swig libssl-dev  && \
-    apt-get install -y libcups2-dev   && \
-    apt-get install -y python-cffi python-openssl python-defusedxml
+    apt-get install -y libcups2-dev 
 
 # 
 RUN pip install urllib3
@@ -57,10 +56,19 @@ RUN pip install pymssql
 
 RUN pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds cryptography certifi
 
+# odoo bmya cambiado de orden (antes o despues de odoo argentina)
 
 # to be removed when we remove crypto
 RUN pip install suds
 
+# Agregado por Daniel Blanco para ver si soluciona el problema de la falta de la biblioteca pysimplesoap
+# RUN git clone https://github.com/pysimplesoap/pysimplesoap.git
+# WORKDIR /pysimplesoap/
+# RUN python setup.py install
+
+# instala pyafip desde google code usando mercurial
+# M2Crypto suponemos que no haria falta ahora
+# RUN hg clone https://code.google.com/p/pyafipws
 RUN git clone https://github.com/bmya/pyafipws.git
 WORKDIR /pyafipws/
 # ADD ./requirements.txt /pyafipws/
@@ -68,6 +76,10 @@ RUN pip install -r requirements.txt
 RUN python setup.py install
 RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
+# RUN git clone https://github.com/reingart/pyafipws.git
+# WORKDIR /pyafipws/
+# RUN python setup.py install
+# RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
 # odoo etl, infra and others
 RUN pip install openerp-client-lib fabric erppeek fabtools
@@ -76,24 +88,12 @@ RUN pip install openerp-client-lib fabric erppeek fabtools
 RUN pip install xmltodict
 RUN pip install dicttoxml
 RUN pip install elaphe
-RUN pip install M2Crypto 
-RUN pip install base64
-RUN pip install hashlib
+# RUN pip install hashlib
 RUN pip install cchardet
-RUN pip install suds
-RUN pip install urllib3
-RUN pip install signxml
-RUN pip install textwrap
-RUN pip install cStringIO
-RUN pip install urllib3==1.7.1
-RUN pip install requests==2.6.0
-
-
-
 RUN pip install lxml
+RUN pip install signxml
 
-
-#RUN pip install pysftp Backups
+#RUN pip install pysftp
 RUN pip install pysftp==0.2.8
 
 # oca reports
@@ -101,10 +101,6 @@ RUN pip install xlwt
 
 # odoo kineses
 RUN pip install xlrd
-
-
-
-
 
 # create directories for repos
 RUN mkdir -p /opt/odoo/stable-addons/oca
@@ -136,11 +132,17 @@ RUN pip install BeautifulSoup4
 # OCA knowledge
 RUN pip install python-magic
 
+# l10n_cl_dte exclusive
+# RUN apt-get -y install xmlsec1
+# RUN apt-get -y install libxml2-dev libxmlsec1-dev
+# RUN pip install dm.xmlsec.binding
 RUN pip install SOAPpy
 RUN pip install xlsxwriter
 RUN pip install mercadopago
-RUN pip install erppeek
+# RUN pip install fs
 
+# odoo suspport
+RUN pip install erppeek
 
 WORKDIR /opt/odoo/stable-addons/bmya/odoo-chile/
 
