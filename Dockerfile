@@ -34,7 +34,8 @@ RUN apt-get install -y ghostscript  && \
 # 
 # RUN pip install urllib3
 RUN pip install urllib3==1.7.1
-RUN pip install requests
+# Debo agregar Requests
+# RUN pip install requests
 RUN pip install egenix-mx-base
 
 
