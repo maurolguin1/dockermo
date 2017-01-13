@@ -61,14 +61,6 @@ RUN pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds cryptography certifi
 RUN pip install suds
 
 
-
-
-WORKDIR /pyafipws/
-# ADD ./requirements.txt /pyafipws/
-RUN pip install -r requirements.txt
-RUN python setup.py install
-RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
-
 # odoo etl, infra and others
 RUN pip install openerp-client-lib fabric erppeek fabtools
 
