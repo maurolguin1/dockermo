@@ -99,7 +99,7 @@ RUN pip install erppeek
 #RUN pip install base64
 #RUN pip install hashlib
 #RUN pip install textwrap
-RUN pip install cStringIO
+#RUN pip install cStringIO
 
 #RUN pip install pysftp
 RUN pip install pysftp==0.2.8
