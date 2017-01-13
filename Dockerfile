@@ -36,7 +36,7 @@ RUN apt-get install -y ghostscript  && \
 RUN pip install urllib3==1.7.1
 # Debo agregar Requests
 # RUN pip install requests
-RUN pip install egenix-mx-base
+#RUN pip install egenix-mx-base
 
 
 # letsencrypt dependencies:
