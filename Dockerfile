@@ -31,8 +31,7 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y libcups2-dev 
 
 # 
-RUN pip install urllib3
-RUN pip install egenix-mx-base
+
 
 
 # letsencrypt dependencies:
@@ -90,9 +89,14 @@ RUN pip install dicttoxml
 RUN pip install elaphe
 # RUN pip install hashlib
 RUN pip install cchardet
+RUN pip install urllib3
+RUN pip install SOAPpy
+RUN pip install egenix-mx-base
 RUN pip install lxml
 RUN pip install signxml
-RUN pip install base64
+RUN pip install erppeek
+#Debo colocarlo
+#RUN pip install base64
 RUN pip install hashlib
 RUN pip install textwrap
 RUN pip install cStringIO
@@ -142,7 +146,7 @@ RUN pip install python-magic
 # RUN apt-get -y install xmlsec1
 # RUN apt-get -y install libxml2-dev libxmlsec1-dev
 # RUN pip install dm.xmlsec.binding
-RUN pip install SOAPpy
+
 RUN pip install xlsxwriter
 RUN pip install mercadopago
 # RUN pip install fs
