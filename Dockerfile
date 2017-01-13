@@ -31,7 +31,9 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y libcups2-dev 
 
 # 
-RUN pip install urllib3
+# RUN pip install urllib3
+RUN pip install urllib3==1.7.1
+RUN pip install requests==2.6.0
 RUN pip install egenix-mx-base
 
 
@@ -92,6 +94,10 @@ RUN pip install elaphe
 RUN pip install cchardet
 RUN pip install lxml
 RUN pip install signxml
+RUN pip install base64
+RUN pip install hashlib
+RUN pip install textwrap
+RUN pip install cStringIO
 
 #RUN pip install pysftp
 RUN pip install pysftp==0.2.8
