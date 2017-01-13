@@ -165,29 +165,23 @@ RUN git clone -b 9.0 https://github.com/dansanti/l10n_cl_banks_sbif.git  \
     && git clone -b 9.0 https://github.com/dansanti/global_discount  \
     && git clone -b 9.0 https://github.com/dansanti/base_state_ubication.git \
     && git clone -b 9.0 https://github.com/dansanti/user_signature_key.git \
-    && git clone -b 9.0 https://github.com/OCA/pos.git  \
     && git clone -b 9.0 https://github.com/dansanti/webservices_generic.git   \
     && git clone -b 9.0 https://github.com/odoo-chile/l10n_cl_hr_payroll.git \
     && git clone -b 9.0 https://github.com/odoo-chile/l10n_cl_financial_indicators.git \
     && git clone -b 9.0 https://github.com/odoo-chile/l10n_cl_account_vat_ledger.git \
     && git clone -b 9.0 https://github.com/KonosCL/payment_mercadopago.git \
-    && git clone -b Odoo-9 https://github.com/nelsonramirezs/hr_loan.git \
     && git clone -b 9.0 https://github.com/nelsonramirezs/odoo-ifrs.git \
     && git clone -b master https://github.com/nelsonramirezs/report_xlsx.git
     
-WORKDIR /opt/odoo/stable-addons/bmya/odoo-chile/
+WORKDIR /opt/odoo/stable-addons/oca/
     
 RUN git clone -b 9.0 https://github.com/OCA/server-tools.git  \
-    && git clone -b 9.0 https://github.com/OCA/vertical-medical.git  \
     && git clone -b 9.0 https://github.com/OCA/crm.git  \
-    && git clone -b 9.0 https://github.com/OCA/e-commerce.git  
-    
-WORKDIR /opt/odoo/stable-addons/oca/
-
-#RUN git clone -b 9.0 https://github.com/OCA/knowledge.git  \
-RUN git  clone -b 9.0 https://github.com/OCA/web.git  
-RUN git  clone -b 9.0 https://github.com/OCA/bank-statement-reconcile.git  
-RUN git  clone -b 9.0 https://github.com/OCA/account-invoicing.git
+    && git clone -b 9.0 https://github.com/OCA/pos.git  \
+    && git clone -b 9.0 https://github.com/OCA/e-commerce.git   \ 
+    && git  clone -b 9.0 https://github.com/OCA/web.git    \
+    && git  clone -b 9.0 https://github.com/OCA/bank-statement-reconcile.git    \
+    && git  clone -b 9.0 https://github.com/OCA/account-invoicing.git
     
    
 
