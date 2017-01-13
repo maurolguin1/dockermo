@@ -1,22 +1,25 @@
-# unicodecsv
-# git+https://github.com/aeroo/aeroolib.git@master
-# pycups==1.9.68
-# BeautifulSoup4
-# python-magic
-# gdata
-# pysimplesoap
-# fpdf
 httplib2>=0.7
 pysimplesoap==1.08.8
 fpdf>=1.7.2
 dbf>=0.88.019
 Pillow>=2.0.0
-# requests>=2.6.0
-# pywin32==219
-# xmltodict
-# elaphe
+xmltodict
+dicttoxml==1.7.4
+elaphe
+M2Crypto==0.24.0
+base64
+hashlib
+cchardet
 suds
-urllib3
+SOAPpy
+signxml==1.0.1
+textwrap
+cStringIO
+pysftp==0.2.8
+urllib3==1.7.1
+requests>=2.6.0
+xlsxwriter
+#Hasta Aqui
 acme-tiny
 IPy
 woocommerce
@@ -28,16 +31,8 @@ openerp-client-lib
 fabric
 erppeek
 fabtools
-xmltodict
-dicttoxml
-elaphe
-cchardet
 lxml
-signxml
-pysftp
 xlwt
 xlrd
 BeautifulSoup4
 python-magic
-SOAPpy
-erppeek
