@@ -5,10 +5,9 @@ MAINTAINER Nelson Ramirez <info@konos.cl>
 # install some dependencies
 USER root
 
-# Generate locale (es_AR for right odoo es_AR language config, and C.UTF-8 for postgres and general locale data)
+
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq && apt-get install -y locales -qq
-RUN echo 'es_AR.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'es_CL.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'es_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'C.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
@@ -28,7 +27,8 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
     apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
     apt-get install -y swig libssl-dev  && \
-    apt-get install -y libcups2-dev 
+    apt-get install -y libcups2-dev   && \
+    apt-get install -y python-cffi python-openssl python-defusedxml
 
 # 
 RUN pip install urllib3
@@ -56,7 +56,6 @@ RUN pip install pymssql
 
 RUN pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds cryptography certifi
 
-# odoo bmya cambiado de orden (antes o despues de odoo argentina)
 
 # to be removed when we remove crypto
 RUN pip install suds
@@ -69,7 +68,6 @@ WORKDIR /pyafipws/
 RUN pip install -r requirements.txt
 RUN python setup.py install
 RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
-
 
 # odoo etl, infra and others
 RUN pip install openerp-client-lib fabric erppeek fabtools
