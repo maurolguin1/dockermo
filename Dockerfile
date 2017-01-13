@@ -61,25 +61,15 @@ RUN pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds cryptography certifi
 # to be removed when we remove crypto
 RUN pip install suds
 
-# Agregado por Daniel Blanco para ver si soluciona el problema de la falta de la biblioteca pysimplesoap
-# RUN git clone https://github.com/pysimplesoap/pysimplesoap.git
-# WORKDIR /pysimplesoap/
-# RUN python setup.py install
 
-# instala pyafip desde google code usando mercurial
-# M2Crypto suponemos que no haria falta ahora
-# RUN hg clone https://code.google.com/p/pyafipws
-RUN git clone https://github.com/bmya/pyafipws.git
+
+
 WORKDIR /pyafipws/
 # ADD ./requirements.txt /pyafipws/
 RUN pip install -r requirements.txt
 RUN python setup.py install
 RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
-# RUN git clone https://github.com/reingart/pyafipws.git
-# WORKDIR /pyafipws/
-# RUN python setup.py install
-# RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
 # odoo etl, infra and others
 RUN pip install openerp-client-lib fabric erppeek fabtools
@@ -88,12 +78,25 @@ RUN pip install openerp-client-lib fabric erppeek fabtools
 RUN pip install xmltodict
 RUN pip install dicttoxml
 RUN pip install elaphe
-# RUN pip install hashlib
+RUN pip install M2Crypto 
+RUN pip install base64
+RUN pip install hashlib
 RUN pip install cchardet
-RUN pip install lxml
+RUN pip install suds
+RUN pip install urllib3
+RUN pip install SOAPpy
 RUN pip install signxml
+RUN pip install textwrap
+RUN pip install cStringIO
+RUN pip install urllib3==1.7.1
+RUN pip install requests==2.6.0
+RUN pip install xlsxwriter
 
-#RUN pip install pysftp
+
+RUN pip install lxml
+
+
+#RUN pip install pysftp Backups
 RUN pip install pysftp==0.2.8
 
 # oca reports
@@ -101,6 +104,14 @@ RUN pip install xlwt
 
 # odoo kineses
 RUN pip install xlrd
+
+
+# Mercadolibre
+RUN pip install mercadopago
+
+# odoo suspport
+RUN pip install erppeek
+
 
 # create directories for repos
 RUN mkdir -p /opt/odoo/stable-addons/oca
@@ -132,17 +143,6 @@ RUN pip install BeautifulSoup4
 # OCA knowledge
 RUN pip install python-magic
 
-# l10n_cl_dte exclusive
-# RUN apt-get -y install xmlsec1
-# RUN apt-get -y install libxml2-dev libxmlsec1-dev
-# RUN pip install dm.xmlsec.binding
-RUN pip install SOAPpy
-RUN pip install xlsxwriter
-RUN pip install mercadopago
-# RUN pip install fs
-
-# odoo suspport
-RUN pip install erppeek
 
 WORKDIR /opt/odoo/stable-addons/bmya/odoo-chile/
 
@@ -156,6 +156,7 @@ RUN git clone -b 9.0 https://github.com/dansanti/l10n_cl_banks_sbif.git  \
     && git clone -b 9.0 https://github.com/dansanti/l10n_cl_counties.git  \
     && git clone -b 9.0 https://github.com/dansanti/l10n_cl_partner_activities.git  \
     && git clone -b 9.0 https://github.com/dansanti/l10n_cl_base_rut.git  \
+    && git clone -b 9.0 https://github.com/dansanti/global_discount  \
     && git clone -b 9.0 https://github.com/dansanti/base_state_ubication.git \
     && git clone -b 9.0 https://github.com/dansanti/user_signature_key.git \
     && git clone -b 9.0 https://github.com/OCA/pos.git  \
