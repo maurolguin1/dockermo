@@ -31,17 +31,15 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y libcups2-dev && \
     apt-get install -y python-cffi python-openssl python-defusedxml
 
-# 
-# RUN pip install urllib3
-RUN pip install urllib3==1.7.1
+
 # Debo agregar Requests
 # RUN pip install requests
-#RUN pip install egenix-mx-base
+RUN pip install urllib3
+RUN pip install egenix-mx-base
 
 
 # letsencrypt dependencies:
 RUN pip install acme-tiny
-#RUN sudo pip install IPy
 
 # woocommerce dependency
 RUN pip install woocommerce
