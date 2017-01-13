@@ -98,7 +98,7 @@ RUN pip install erppeek
 #Debo colocarlo
 #RUN pip install base64
 #RUN pip install hashlib
-RUN pip install textwrap
+#RUN pip install textwrap
 RUN pip install cStringIO
 
 #RUN pip install pysftp
