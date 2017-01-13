@@ -8,6 +8,7 @@ USER root
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq && apt-get install -y locales -qq
+RUN echo 'es_AR.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'es_CL.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'es_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'C.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
@@ -60,6 +61,13 @@ RUN pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds cryptography certifi
 # to be removed when we remove crypto
 RUN pip install suds
 
+RUN git clone https://github.com/bmya/pyafipws.git
+WORKDIR /pyafipws/
+# ADD ./requirements.txt /pyafipws/
+RUN pip install -r requirements.txt
+RUN python setup.py install
+RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
+
 
 # odoo etl, infra and others
 RUN pip install openerp-client-lib fabric erppeek fabtools
@@ -74,13 +82,12 @@ RUN pip install hashlib
 RUN pip install cchardet
 RUN pip install suds
 RUN pip install urllib3
-RUN pip install SOAPpy
 RUN pip install signxml
 RUN pip install textwrap
 RUN pip install cStringIO
 RUN pip install urllib3==1.7.1
 RUN pip install requests==2.6.0
-RUN pip install xlsxwriter
+
 
 
 RUN pip install lxml
@@ -96,11 +103,7 @@ RUN pip install xlwt
 RUN pip install xlrd
 
 
-# Mercadolibre
-RUN pip install mercadopago
 
-# odoo suspport
-RUN pip install erppeek
 
 
 # create directories for repos
@@ -132,6 +135,11 @@ RUN pip install BeautifulSoup4
 
 # OCA knowledge
 RUN pip install python-magic
+
+RUN pip install SOAPpy
+RUN pip install xlsxwriter
+RUN pip install mercadopago
+RUN pip install erppeek
 
 
 WORKDIR /opt/odoo/stable-addons/bmya/odoo-chile/
