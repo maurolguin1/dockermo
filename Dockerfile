@@ -28,7 +28,8 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
     apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
     apt-get install -y swig libssl-dev  && \
-    apt-get install -y libcups2-dev 
+    apt-get install -y libcups2-dev && \
+    apt-get install -y python-cffi python-openssl python-defusedxml
 
 # 
 # RUN pip install urllib3
