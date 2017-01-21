@@ -192,11 +192,19 @@ RUN git clone -b 9.0 https://github.com/OCA/server-tools.git  \
    
 
 RUN chown -R odoo:odoo /opt/odoo/stable-addons
+WORKDIR /opt/odoo/stable-addons/
+
+RUN git clone -b 9.0 https://github.com/ingadhoc/aeroo_reports.git    
 
 ## Clean apt-get (copied from odoo)
 RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Change default aeroo host name to match docker name
+RUN sed  -i  "s/localhost/aeroo/" /opt/odoo/stable-addons/aeroo_reports/report_aeroo/docs_client_lib.py
+RUN sed  -i  "s/localhost/aeroo/" /opt/odoo/stable-addons/aeroo_reports/report_aeroo/installer.py
+RUN sed  -i  "s/localhost/aeroo/" /opt/odoo/stable-addons/aeroo_reports/report_aeroo/report_aeroo.py
 
 # Set default user when running the container
 USER odoo
