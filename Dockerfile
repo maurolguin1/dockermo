@@ -186,7 +186,8 @@ RUN git clone -b 9.0 https://github.com/OCA/server-tools.git  \
     && git  clone -b 9.0 https://github.com/OCA/web.git    \
     && git  clone -b 9.0 https://github.com/OCA/bank-statement-reconcile.git    \
     && git  clone -b 9.0 https://github.com/OCA/account-invoicing.git    \
-    && git  clone -b 9.0 https://github.com/OCA/account-financial-tools
+    && git  clone -b 9.0 https://github.com/ingadhoc/account-payment.git    \
+    && git  clone -b 9.0 https://github.com/OCA/account-financial-tools.git
     
    
 
