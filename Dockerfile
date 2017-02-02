@@ -93,7 +93,7 @@ RUN pip install urllib3
 RUN pip install SOAPpy
 RUN pip install egenix-mx-base
 RUN pip install lxml
-RUN pip install signxml
+RUN pip install signxml==1.0.1
 RUN pip install erppeek
 #Debo colocarlo
 #RUN pip install base64
