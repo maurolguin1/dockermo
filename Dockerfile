@@ -55,7 +55,7 @@ RUN pip install pymssql
 
 RUN pip install geopy==0.95.1 
 RUN pip install BeautifulSoup 
-RUN pip install pyOpenSSL 
+#RUN pip install pyOpenSSL 
 RUN pip install suds 
 RUN pip install cryptography 
 RUN pip install certifi
