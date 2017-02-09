@@ -28,7 +28,10 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
     apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
     apt-get install -y swig libssl-dev  && \
-    apt-get install -y libcups2-dev 
+    apt-get install -y libcups2-dev   && \
+    apt-get install  -y libxslt1-dev python-lxml python-cryptography python-certifi   && \
+    apt-get install -y python-cffi python-openssl python-defusedxml
+
 
 # 
 
@@ -93,7 +96,7 @@ RUN pip install urllib3
 RUN pip install SOAPpy
 RUN pip install egenix-mx-base
 RUN pip install lxml
-RUN pip install signxml==1.0.1
+RUN pip install signxml
 RUN pip install erppeek
 #Debo colocarlo
 #RUN pip install base64
@@ -130,7 +133,7 @@ RUN chown -R odoo /var/lib/odoo
 RUN pip install unicodecsv
 
 
-RUN apt-get install -y python-cffi python-openssl python-defusedxml
+
 
 # aeroo direct print
 RUN pip install git+https://github.com/aeroo/aeroolib.git@master
