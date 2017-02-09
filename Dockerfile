@@ -7,7 +7,8 @@ USER root
 
 # Generate locale (es_AR for right odoo es_AR language config, and C.UTF-8 for postgres and general locale data)
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update -qq && apt-get install -y locales -qq
+RUN apt-get update -qq && apt-get install -y locales -qq && \
+    apt-get install apt-utils --yes --force-yes
 RUN echo 'es_AR.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'es_CL.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'es_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
@@ -28,12 +29,11 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
     apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
     apt-get install -y swig libssl-dev  && \
-    apt-get install  -y libxslt1-dev python-lxml   && \
-    apt-get install -y libcups2-dev 
+    apt-get install -y libcups2-dev
 
-# Falta python-cryptography   && \
+# 
 
-RUN pip install certifi
+
 
 # letsencrypt dependencies:
 RUN pip install acme-tiny
