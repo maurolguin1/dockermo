@@ -57,7 +57,7 @@ RUN pip install geopy==0.95.1
 RUN pip install BeautifulSoup 
 #RUN pip install pyOpenSSL 
 RUN pip install suds 
-RUN pip install cryptography 
+#RUN pip install cryptography 
 RUN pip install certifi
 
 # odoo bmya cambiado de orden (antes o despues de odoo argentina)
