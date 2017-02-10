@@ -137,7 +137,8 @@ RUN chown -R odoo /var/lib/odoo
 RUN pip install unicodecsv
 
 
-RUN apt-get install -y python-cffi python-openssl python-defusedxml
+RUN apt-get install -y python-openssl python-defusedxml
+# python-cffi
 
 # aeroo direct print
 RUN pip install git+https://github.com/aeroo/aeroolib.git@master
