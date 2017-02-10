@@ -87,7 +87,7 @@ RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
 # odoo etl, infra and others
 RUN pip install openerp-client-lib
-RUN pip install fabric 
+#RUN pip install fabric 
 RUN pip install fabtools
 
 # dte implementation
