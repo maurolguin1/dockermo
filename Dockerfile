@@ -34,40 +34,7 @@ RUN apt-get install -y ghostscript  && \
 
 
 
-# letsencrypt dependencies:
-RUN pip install acme-tiny
-#RUN sudo pip install IPy
-
-# woocommerce dependency
-RUN pip install woocommerce
-RUN pip install magento
-
-
-
-
-RUN pip install psycogreen
-
-
-
-# Freetds an pymssql added in conjunction
-RUN pip install pymssql
-
-
-RUN pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds cryptography certifi
-
-# odoo bmya cambiado de orden (antes o despues de odoo argentina)
-
-# to be removed when we remove crypto
 RUN pip install suds
-
-# Agregado por Daniel Blanco para ver si soluciona el problema de la falta de la biblioteca pysimplesoap
-# RUN git clone https://github.com/pysimplesoap/pysimplesoap.git
-# WORKDIR /pysimplesoap/
-# RUN python setup.py install
-
-# instala pyafip desde google code usando mercurial
-# M2Crypto suponemos que no haria falta ahora
-# RUN hg clone https://code.google.com/p/pyafipws
 RUN git clone https://github.com/bmya/pyafipws.git
 WORKDIR /pyafipws/
 # ADD ./requirements.txt /pyafipws/
@@ -75,10 +42,6 @@ RUN pip install -r requirements.txt
 RUN python setup.py install
 RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
-# RUN git clone https://github.com/reingart/pyafipws.git
-# WORKDIR /pyafipws/
-# RUN python setup.py install
-# RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
 # odoo etl, infra and others
 RUN pip install openerp-client-lib fabric fabtools
