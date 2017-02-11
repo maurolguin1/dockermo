@@ -49,7 +49,7 @@ RUN pip install urllib3
 RUN pip install SOAPpy
 RUN pip install M2Crypto
 RUN pip install --upgrade setupext-pip
-RUN pip install signxml
+RUN pip install signxml==1.0.1
 #RUN pip install textwrap
 #RUN pip install cStringIO
 RUN pip install pysftp==0.2.8
