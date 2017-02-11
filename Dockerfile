@@ -47,7 +47,7 @@ RUN pip install cchardet
 RUN pip install suds
 RUN pip install urllib3
 RUN pip install SOAPpy
-#RUN pip --no-cache-dir install https://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-0.24.0.tar.gz
+RUN pip --no-cache-dir install https://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-0.24.0.tar.gz
 RUN pip install signxml
 RUN pip install textwrap
 RUN pip install cStringIO
