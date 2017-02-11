@@ -42,12 +42,11 @@ RUN pip install psycogreen
 RUN pip install pymssql
 
 
-RUN pip install geopy==0.95.1 pyOpenSSL suds certifi
-
-#cryptography hay que agregar
-
 RUN pip install suds
 RUN pip install -r requirements.txt
+
+RUN pip install cryptography
+RUN pip install geopy==0.95.1 pyOpenSSL suds certifi
 
 RUN git clone https://github.com/bmya/pyafipws.git
 WORKDIR /pyafipws/
