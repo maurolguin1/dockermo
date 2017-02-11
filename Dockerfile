@@ -13,7 +13,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     apt-utils \
  && rm -rf /var/lib/apt/lists/*
 
-RUN echo 'es_AR.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'es_CL.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'es_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'C.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
@@ -43,17 +42,15 @@ RUN pip install psycogreen
 RUN pip install pymssql
 
 
-RUN pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds certifi
+RUN pip install geopy==0.95.1 pyOpenSSL suds certifi
 
 #cryptography hay que agregar
 
 RUN pip install suds
-
+RUN pip install -r requirements.txt
 
 RUN git clone https://github.com/bmya/pyafipws.git
 WORKDIR /pyafipws/
-# ADD ./requirements.txt /pyafipws/
-RUN pip install -r requirements.txt
 RUN python setup.py install
 RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
@@ -101,12 +98,8 @@ RUN chown -R odoo /opt/odoo
 RUN chown -R odoo /opt/odoo/stable-addons
 RUN chown -R odoo /mnt/extra-addons
 RUN chown -R odoo /var/lib/odoo
-# RUN chown -R odoo /mnt/filelocal/odoo
 
-# oca partner contacts
 RUN pip install unicodecsv
-
-
 RUN apt-get install -y python-cffi python-openssl python-defusedxml
 
 # aeroo direct print
@@ -118,17 +111,8 @@ RUN pip install BeautifulSoup4
 
 # OCA knowledge
 RUN pip install python-magic
-
-# l10n_cl_dte exclusive
-# RUN apt-get -y install xmlsec1
-# RUN apt-get -y install libxml2-dev libxmlsec1-dev
-# RUN pip install dm.xmlsec.binding
-
 RUN pip install xlsxwriter
 RUN pip install mercadopago
-# RUN pip install fs
-
-# odoo suspport
 RUN pip install erppeek
 
 WORKDIR /opt/odoo/stable-addons/bmya/odoo-chile/
