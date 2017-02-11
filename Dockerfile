@@ -1,4 +1,4 @@
-FROM nelsonramirezs/odoo9:latest
+ROM nelsonramirezs/odoo9:latest
 MAINTAINER Nelson Ramirez <info@konos.cl>
 # based on https://github.com/bmya/docker-odoo-adhoc
 # with custom references
@@ -8,11 +8,7 @@ USER root
 # Generate locale (es_AR for right odoo es_AR language config, and C.UTF-8 for postgres and general locale data)
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq && apt-get install -y locales -qq
-
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    apt-utils \
- && rm -rf /var/lib/apt/lists/*
-
+RUN echo 'es_AR.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'es_CL.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'es_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'C.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
@@ -22,6 +18,8 @@ ENV LANGUAGE C.UTF-8
 ENV LC_ALL C.UTF-8
 
 
+# Install some deps
+# adds slqalchemy
 RUN apt-get update && apt-get install -y python-pip git vim
 RUN apt-get install -y ghostscript  && \
     apt-get install -y python-gevent  && \
@@ -32,8 +30,21 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y swig libssl-dev  && \
     apt-get install -y libcups2-dev 
 
+# 
 
+
+
+# letsencrypt dependencies:
 RUN pip install acme-tiny
+#RUN sudo pip install IPy
+
+# woocommerce dependency
+RUN pip install woocommerce
+RUN pip install magento
+
+
+
+
 RUN pip install psycogreen
 
 
@@ -42,18 +53,34 @@ RUN pip install psycogreen
 RUN pip install pymssql
 
 
+RUN pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds cryptography certifi
+
+# odoo bmya cambiado de orden (antes o despues de odoo argentina)
+
+# to be removed when we remove crypto
 RUN pip install suds
-RUN pip install -r requirements.txt
 
-RUN pip install cryptography
-RUN pip install geopy==0.95.1 pyOpenSSL suds certifi
+# Agregado por Daniel Blanco para ver si soluciona el problema de la falta de la biblioteca pysimplesoap
+# RUN git clone https://github.com/pysimplesoap/pysimplesoap.git
+# WORKDIR /pysimplesoap/
+# RUN python setup.py install
 
+# instala pyafip desde google code usando mercurial
+# M2Crypto suponemos que no haria falta ahora
+# RUN hg clone https://code.google.com/p/pyafipws
 RUN git clone https://github.com/bmya/pyafipws.git
 WORKDIR /pyafipws/
+# ADD ./requirements.txt /pyafipws/
+RUN pip install -r requirements.txt
 RUN python setup.py install
 RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
+# RUN git clone https://github.com/reingart/pyafipws.git
+# WORKDIR /pyafipws/
+# RUN python setup.py install
+# RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
+# odoo etl, infra and others
 RUN pip install openerp-client-lib fabric fabtools
 
 # dte implementation
@@ -97,8 +124,12 @@ RUN chown -R odoo /opt/odoo
 RUN chown -R odoo /opt/odoo/stable-addons
 RUN chown -R odoo /mnt/extra-addons
 RUN chown -R odoo /var/lib/odoo
+# RUN chown -R odoo /mnt/filelocal/odoo
 
+# oca partner contacts
 RUN pip install unicodecsv
+
+
 RUN apt-get install -y python-cffi python-openssl python-defusedxml
 
 # aeroo direct print
@@ -110,8 +141,17 @@ RUN pip install BeautifulSoup4
 
 # OCA knowledge
 RUN pip install python-magic
+
+# l10n_cl_dte exclusive
+# RUN apt-get -y install xmlsec1
+# RUN apt-get -y install libxml2-dev libxmlsec1-dev
+# RUN pip install dm.xmlsec.binding
+
 RUN pip install xlsxwriter
 RUN pip install mercadopago
+# RUN pip install fs
+
+# odoo suspport
 RUN pip install erppeek
 
 WORKDIR /opt/odoo/stable-addons/bmya/odoo-chile/
@@ -145,16 +185,26 @@ RUN git clone -b 9.0 https://github.com/OCA/server-tools.git  \
     && git clone -b 9.0 https://github.com/OCA/e-commerce.git   \ 
     && git  clone -b 9.0 https://github.com/OCA/web.git    \
     && git  clone -b 9.0 https://github.com/OCA/bank-statement-reconcile.git    \
-    && git  clone -b 9.0 https://github.com/OCA/account-invoicing.git
+    && git  clone -b 9.0 https://github.com/OCA/account-invoicing.git    \
+    && git  clone -b 9.0 https://github.com/ingadhoc/account-payment.git    \
+    && git  clone -b 9.0 https://github.com/OCA/account-financial-tools.git
     
    
 
 RUN chown -R odoo:odoo /opt/odoo/stable-addons
+WORKDIR /opt/odoo/stable-addons/
+
+RUN git clone -b 9.0 https://github.com/ingadhoc/aeroo_reports.git    
 
 ## Clean apt-get (copied from odoo)
 RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Change default aeroo host name to match docker name
+RUN sed  -i  "s/localhost/aeroo/" /opt/odoo/stable-addons/aeroo_reports/report_aeroo/docs_client_lib.py
+RUN sed  -i  "s/localhost/aeroo/" /opt/odoo/stable-addons/aeroo_reports/report_aeroo/installer.py
+RUN sed  -i  "s/localhost/aeroo/" /opt/odoo/stable-addons/aeroo_reports/report_aeroo/report_aeroo.py
 
 # Set default user when running the container
 USER odoo
