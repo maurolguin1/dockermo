@@ -53,12 +53,7 @@ RUN pip install psycogreen
 RUN pip install pymssql
 
 
-RUN pip install geopy==0.95.1 
-RUN pip install BeautifulSoup 
-#RUN pip install pyOpenSSL 
-RUN pip install suds 
-#RUN pip install cryptography 
-RUN pip install certifi
+RUN pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds cryptography certifi
 
 # odoo bmya cambiado de orden (antes o despues de odoo argentina)
 
@@ -86,9 +81,7 @@ RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 # RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
 # odoo etl, infra and others
-RUN pip install openerp-client-lib
-#RUN pip install fabric 
-#RUN pip install fabtools
+RUN pip install openerp-client-lib fabric fabtools
 
 # dte implementation
 RUN pip install xmltodict
@@ -137,8 +130,7 @@ RUN chown -R odoo /var/lib/odoo
 RUN pip install unicodecsv
 
 
-RUN apt-get install -y python-openssl python-defusedxml
-# python-cffi
+RUN apt-get install -y python-cffi python-openssl python-defusedxml
 
 # aeroo direct print
 RUN pip install git+https://github.com/aeroo/aeroolib.git@master
