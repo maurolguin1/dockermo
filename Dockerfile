@@ -1,14 +1,12 @@
 FROM nelsonramirezs/odoo9:latest
 MAINTAINER Nelson Ramirez <info@konos.cl>
 # based on https://github.com/bmya/docker-odoo-adhoc
-# with custom references
-# install some dependencies
+
 USER root
 
-# Generate locale (es_AR for right odoo es_AR language config, and C.UTF-8 for postgres and general locale data)
+
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq && apt-get install -y locales -qq
-RUN echo 'es_AR.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'es_CL.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'es_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 RUN echo 'C.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
@@ -18,8 +16,6 @@ ENV LANGUAGE C.UTF-8
 ENV LC_ALL C.UTF-8
 
 
-# Install some deps
-# adds slqalchemy
 RUN apt-get update && apt-get install -y python-pip git vim
 RUN apt-get install -y ghostscript  && \
     apt-get install -y python-gevent  && \
@@ -28,10 +24,9 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
     apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
     apt-get install -y swig libssl-dev  && \
-    apt-get install -y libcups2-dev 
-
-# 
-
+    apt-get install -y libcups2-dev && \
+    apt-get install  libxslt1-dev  python-lxml python-cryptography python-openssl python-certifi python-defusedxml  && \
+    apt-get install -y python-cffi
 
 
 RUN pip install suds
@@ -42,9 +37,6 @@ RUN pip install -r requirements.txt
 RUN python setup.py install
 RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
 
-
-# odoo etl, infra and others
-RUN pip install openerp-client-lib fabric fabtools
 
 # dte implementation
 RUN pip install xmltodict
@@ -63,15 +55,10 @@ RUN pip install erppeek
 #RUN pip install hashlib
 #RUN pip install textwrap
 #RUN pip install cStringIO
-
-#RUN pip install pysftp
 RUN pip install pysftp==0.2.8
 
 # oca reports
 RUN pip install xlwt
-
-# odoo kineses
-RUN pip install xlrd
 
 # create directories for repos
 RUN mkdir -p /opt/odoo/stable-addons/oca
@@ -87,35 +74,18 @@ RUN chown -R odoo /opt/odoo
 RUN chown -R odoo /opt/odoo/stable-addons
 RUN chown -R odoo /mnt/extra-addons
 RUN chown -R odoo /var/lib/odoo
-# RUN chown -R odoo /mnt/filelocal/odoo
 
 # oca partner contacts
 RUN pip install unicodecsv
-
-
-RUN apt-get install -y python-cffi python-openssl python-defusedxml
 
 # aeroo direct print
 RUN pip install git+https://github.com/aeroo/aeroolib.git@master
 RUN pip install pycups==1.9.68
 
-# akretion/odoo-usability
-RUN pip install BeautifulSoup4
-
-# OCA knowledge
-RUN pip install python-magic
-
-# l10n_cl_dte exclusive
-# RUN apt-get -y install xmlsec1
-# RUN apt-get -y install libxml2-dev libxmlsec1-dev
-# RUN pip install dm.xmlsec.binding
 
 RUN pip install xlsxwriter
 RUN pip install mercadopago
-# RUN pip install fs
 
-# odoo suspport
-RUN pip install erppeek
 
 WORKDIR /opt/odoo/stable-addons/bmya/odoo-chile/
 
