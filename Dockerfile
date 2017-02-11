@@ -51,7 +51,7 @@ RUN pip install M2Crypto
 RUN pip install --upgrade setupext-pip
 RUN pip install signxml
 #RUN pip install textwrap
-RUN pip install cStringIO
+#RUN pip install cStringIO
 RUN pip install pysftp==0.2.8
 RUN pip install urllib3==1.7.1
 RUN pip install requests==2.6.0
