@@ -30,11 +30,11 @@ RUN apt-get install -y ghostscript  && \
 
 
 RUN pip install certifi
-RUN git clone https://github.com/bmya/pyafipws.git
-WORKDIR /pyafipws/
+#RUN git clone https://github.com/bmya/pyafipws.git
+#WORKDIR /pyafipws/
 # ADD ./requirements.txt /pyafipws/
 # RUN pip install -r requirements.txt
-RUN python setup.py install
+#RUN python setup.py install
 
 # dte implementation
 RUN pip install xmltodict
