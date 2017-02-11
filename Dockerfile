@@ -21,11 +21,13 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y python-gevent  && \
     apt-get install -y python-dev freetds-dev  && \
     apt-get install -y python-matplotlib font-manager  && \
-    apt-get install -y swig libffi-dev libssl-dev python-m2crypto python-httplib2 mercurial  && \
+    apt-get install -y swig libffi-dev libssl-dev python-httplib2 mercurial  && \
     apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
     apt-get install -y swig libssl-dev  && \
     apt-get install -y libcups2-dev && \
     apt-get install -y libxslt1-dev  python-lxml python-cryptography python-openssl python-defusedxml  
+    
+    
 
 
 
@@ -45,6 +47,7 @@ RUN pip install cchardet
 RUN pip install suds
 RUN pip install urllib3
 RUN pip install SOAPpy
+#RUN pip --no-cache-dir install https://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-0.24.0.tar.gz
 RUN pip install signxml==1.0.1
 RUN pip install textwrap
 RUN pip install cStringIO
