@@ -40,7 +40,6 @@ RUN pip install certifi
 RUN pip install xmltodict
 RUN pip install dicttoxml==1.7.4
 RUN pip install elaphe
-RUN pip install base64
 RUN pip install hashlib
 RUN pip install cchardet
 RUN pip install suds
