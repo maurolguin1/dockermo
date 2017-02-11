@@ -25,8 +25,7 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y libxml2-dev libxslt-dev python-dev lib32z1-dev liblz-dev  && \
     apt-get install -y swig libssl-dev  && \
     apt-get install -y libcups2-dev && \
-    apt-get install  libxslt1-dev  python-lxml python-cryptography python-openssl python-defusedxml  && \
-    apt-get install -y python-cffi
+    apt-get install -y libxslt1-dev  python-lxml python-cryptography python-openssl python-defusedxml  
 
 
 RUN pip install suds
