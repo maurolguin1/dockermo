@@ -28,34 +28,31 @@ RUN apt-get install -y ghostscript  && \
     apt-get install -y libxslt1-dev  python-lxml python-cryptography python-openssl python-defusedxml  
 
 
-RUN pip install suds
+
 RUN pip install certifi
 RUN git clone https://github.com/bmya/pyafipws.git
 WORKDIR /pyafipws/
 # ADD ./requirements.txt /pyafipws/
-RUN pip install -r requirements.txt
+# RUN pip install -r requirements.txt
 RUN python setup.py install
-RUN chmod 777 -R /usr/local/lib/python2.7/dist-packages/pyafipws/
-
 
 # dte implementation
 RUN pip install xmltodict
-RUN pip install dicttoxml
+RUN pip install dicttoxml==1.7.4
 RUN pip install elaphe
-# RUN pip install hashlib
+RUN pip install base64
+RUN pip install hashlib
 RUN pip install cchardet
+RUN pip install suds
 RUN pip install urllib3
 RUN pip install SOAPpy
-RUN pip install egenix-mx-base
-RUN pip install lxml
-RUN pip install signxml
-RUN pip install erppeek
-#Debo colocarlo
-#RUN pip install base64
-#RUN pip install hashlib
-#RUN pip install textwrap
-#RUN pip install cStringIO
+RUN pip install signxml==1.0.1
+RUN pip install textwrap
+RUN pip install cStringIO
 RUN pip install pysftp==0.2.8
+RUN pip install urllib3==1.7.1
+RUN pip install requests==2.6.0
+RUN pip install xlsxwriter
 
 # oca reports
 RUN pip install xlwt
