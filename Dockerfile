@@ -48,6 +48,7 @@ RUN pip install suds
 RUN pip install urllib3
 RUN pip install SOAPpy
 RUN pip install M2Crypto
+RUN pip install --upgrade setupext-pip
 RUN pip install signxml
 RUN pip install textwrap
 RUN pip install cStringIO
