@@ -1,4 +1,4 @@
-ROM nelsonramirezs/odoo9:latest
+FROM nelsonramirezs/odoo9:latest
 MAINTAINER Nelson Ramirez <info@konos.cl>
 # based on https://github.com/bmya/docker-odoo-adhoc
 # with custom references
