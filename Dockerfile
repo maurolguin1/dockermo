@@ -34,11 +34,7 @@ RUN apt-get install -y ghostscript  && \
 
 
 RUN pip install certifi
-#RUN git clone https://github.com/bmya/pyafipws.git
-#WORKDIR /pyafipws/
-# ADD ./requirements.txt /pyafipws/
-# RUN pip install -r requirements.txt
-#RUN python setup.py install
+
 
 # dte implementation
 RUN pip install xmltodict
@@ -107,10 +103,8 @@ RUN git clone -b 9.0 https://github.com/dansanti/l10n_cl_banks_sbif.git  \
     && git clone -b 9.0 https://github.com/dansanti/webservices_generic.git   \
     && git clone -b 9.0 https://github.com/odoo-chile/l10n_cl_hr_payroll.git \
     && git clone -b 9.0 https://github.com/odoo-chile/l10n_cl_financial_indicators.git \
-    && git clone -b 9.0 https://github.com/odoo-chile/l10n_cl_account_vat_ledger.git \
-    && git clone -b 9.0 https://github.com/KonosCL/payment_mercadopago.git \
-    && git clone -b 9.0 https://github.com/nelsonramirezs/odoo-ifrs.git \
-    && git clone -b master https://github.com/nelsonramirezs/report_xlsx.git
+    && git clone -b 9.0 https://github.com/odoo-chile/l10n_cl_account_vat_ledger.git
+
     
 WORKDIR /opt/odoo/stable-addons/oca/
     
@@ -129,7 +123,11 @@ RUN git clone -b 9.0 https://github.com/OCA/server-tools.git  \
 RUN chown -R odoo:odoo /opt/odoo/stable-addons
 WORKDIR /opt/odoo/stable-addons/
 
-RUN git clone -b 9.0 https://github.com/ingadhoc/aeroo_reports.git    
+RUN git clone -b 9.0 https://github.com/KonosCL/aeroo_reports.git       \
+    && git clone -b 9.0 https://github.com/KonosCL/payment_mercadopago.git \
+    && git clone -b 9.0 https://github.com/KonosCL/odoo-ifrs.git \
+    && git clone -b master https://github.com/KonosCL/report_xlsx.git  \
+    && git  clone -b 9.0 https://github.com/KonosCL/auto_backup.git
 
 ## Clean apt-get (copied from odoo)
 RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false
