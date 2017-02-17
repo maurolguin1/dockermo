@@ -1,4 +1,4 @@
-FROM nelsonramirezs/odoo9:latest
+FROM falconsoft3d/odoo:t1
 MAINTAINER Nelson Ramirez <info@konos.cl>
 # based on https://github.com/bmya/docker-odoo-adhoc
 
