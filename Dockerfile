@@ -1,4 +1,4 @@
-FROM falconsoft3d/odoo:t1
+FROM hiperion/9.0:latest
 MAINTAINER Nelson Ramirez <info@konos.cl>
 # based on https://github.com/bmya/docker-odoo-adhoc
 
